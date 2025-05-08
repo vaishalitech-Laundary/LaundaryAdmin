@@ -1,0 +1,16 @@
+export const navItems = [
+     { label: "Dashboard", path: "/" },
+     { label: "Services", path: "/services" },
+     { label: "Inbox", path: "/inbox" },
+     { label: "Orders", path: "/orders" },
+     { label: "Reports", path: "/reports" },
+     { label: "Analytics", path: "/reports/analytics" },
+     { label: "Pricing", path: "/pricing" },
+     { label: "Calendar", path: "/calendar" },
+     { label: "To-Do", path: "/tasks" },
+     { label: "Notifications", path: "/notifications" },
+     { label: "Invoice", path: "/invoice" },
+     { label: "Team", path: "/team" },
+     { label: "Settings", path: "/settings" },
+     { label: "Logout", path: "/logout" },
+];
