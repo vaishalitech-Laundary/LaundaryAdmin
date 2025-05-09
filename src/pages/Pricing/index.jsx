@@ -4,7 +4,7 @@ const Pricing = () => {
   const [pricingPeriod, setPricingPeriod] = useState('monthly');
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <h1 className="text-2xl font-bold mb-8">Pricing</h1>
 
       {/* Toggle buttons */}
@@ -29,14 +29,14 @@ const Pricing = () => {
       <div className="flex flex-wrap justify-center items-center gap-6">
         
         {/* Basic Plan */}
-        <div className="rounded-lg p-8 w-full max-w-xs bg-white shadow-md relative">
+        <div className="rounded-lg p-8 w-full max-w-xs bg-white shadow-md relative transition-transform duration-300 hover:scale-105 hover:shadow-lg">
           <h2 className="text-5xl font-bold mb-2 text-center">Basic Plan</h2>
-          <div className="flex items-baseline mb-6 justify-center">
+          <div className="flex items-baseline mb-15 justify-center">
             <span className="text-4xl font-bold">₹199</span>
             <span className="text-gray-600 text-xl">/mo</span>
           </div>
           
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-5 mb-15">
             <li className="flex items-start gap-2">
               <svg className="w-5 h-5 text-green-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -63,11 +63,11 @@ const Pricing = () => {
             </li>
           </ul>
           
-          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition">
+          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition mb-15">
             Get Started
           </button>
           
-          <div className="text-center mt-6">
+          <div className="text-center mb-10">
             <a href="#" className="text-blue-900 hover:underline text-sm">
               Start Your 1 Day Free Trial
             </a>
@@ -75,17 +75,17 @@ const Pricing = () => {
         </div>
         
         {/* Premium Plan - Made larger and with stronger shadow */}
-        <div className="border-2 border-blue-900 rounded-lg p-8 w-full max-w-sm bg-white shadow-xl relative -mt-6 z-10">
+        <div className="border-2 border-blue-900 rounded-lg p-8 w-full max-w-sm bg-white shadow-xl relative -mt-6 z-10 transition-transform duration-300 hover:scale-105">
           <div className="absolute -top-4 left-0 right-0 mx-auto w-max px-4 py-1 bg-green-400 text-black font-semibold rounded-md">
             Most Popular
           </div>
           <h2 className="text-5xl font-bold mb-2 text-center">Premium Plan</h2>
-          <div className="flex items-baseline mb-6 justify-center">
+          <div className="flex items-baseline mb-20 justify-center">
             <span className="text-4xl font-bold">₹499</span>
             <span className="text-gray-600 text-xl">/mo</span>
           </div>
           
-          <ul className="space-y-5 mb-8">
+          <ul className="space-y-5 mb-18">
             <li className="flex items-start gap-2">
               <svg className="w-5 h-5 text-green-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -112,11 +112,11 @@ const Pricing = () => {
             </li>
           </ul>
           
-          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition">
+          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition mb-15">
             Get started
           </button>
           
-          <div className="text-center mt-6">
+          <div className="text-center mb-10">
             <a href="#" className="text-blue-900 hover:underline text-sm">
               Start Your 1 Day Free Trial
             </a>
@@ -124,14 +124,14 @@ const Pricing = () => {
         </div>
         
         {/* Elite Plan */}
-        <div className="rounded-lg p-7 w-full max-w-xs bg-white shadow-md relative">
+        <div className="rounded-lg p-7 w-full max-w-xs bg-white shadow-md relative transition-transform duration-300 hover:scale-105 hover:shadow-lg">
           <h2 className="text-5xl font-bold mb-2 text-center">Elite Plan</h2>
-          <div className="flex items-baseline mb-6 justify-center">
+          <div className="flex items-baseline mb-15 justify-center">
             <span className="text-4xl font-bold">₹999</span>
             <span className="text-gray-600 text-xl">/mo</span>
           </div>
           
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-3 mb-15">
             <li className="flex items-start gap-2">
               <svg className="w-5 h-5 text-green-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -164,11 +164,11 @@ const Pricing = () => {
             </li>
           </ul>
           
-          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition">
+          <button className="w-full bg-[#1F3C5F] text-white py-3 rounded-md hover:bg-blue-800 transition mb-15">
             Get started
           </button>
           
-          <div className="text-center mt-6">
+          <div className="text-center mb-10">
             <a href="#" className="text-blue-900 hover:underline text-sm">
               Start Your 1 Day Free Trial
             </a>
