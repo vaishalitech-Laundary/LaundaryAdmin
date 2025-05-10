@@ -7,17 +7,29 @@ const Pricing = () => {
     <div className="w-full">
       <h1 className="text-2xl font-bold mb-8">Pricing</h1>
 
-      {/* Toggle buttons */}
+      {/* Toggle buttons with sliding effect */}
       <div className="flex justify-center mb-12">
-        <div className="inline-flex bg-gray-100 rounded-md p-1">
+        <div className="inline-flex bg-gray-100 rounded-md p-1 relative">
+          {/* Sliding background element */}
+          <div 
+            className={`absolute top-1 h-[calc(100%-8px)] w-[calc(50%-4px)] bg-[#1F3C5F] rounded-md transition-all duration-300 ease-in-out ${
+              pricingPeriod === 'yearly' ? 'left-[calc(50%+2px)]' : 'left-2.5'
+            }`}
+          ></div>
+          
+          {/* Button text elements (now positioned above the sliding background) */}
           <button 
-            className={`px-4 py-2 cursor-pointer rounded-md ${pricingPeriod === 'monthly' ? 'bg-[#1F3C5F] text-white' : ''}`}
+            className={`px-4 py-2 z-10 relative rounded-md transition-colors duration-300 ease-in-out cursor-pointer ${
+              pricingPeriod === 'monthly' ? 'text-white' : 'text-gray-700'
+            }`}
             onClick={() => setPricingPeriod('monthly')}
           >
             Monthly
           </button>
           <button 
-            className={`px-4 py-2 cursor-pointer rounded-md ${pricingPeriod === 'yearly' ? 'bg-[#1F3C5F] text-white' : ''}`}
+            className={`px-4 py-2 z-10 relative rounded-md transition-colors duration-300 ease-in-out cursor-pointer ${
+              pricingPeriod === 'yearly' ? 'text-white' : 'text-gray-700'
+            }`}
             onClick={() => setPricingPeriod('yearly')}
           >
             Yearly
@@ -25,7 +37,7 @@ const Pricing = () => {
         </div>
       </div>
 
-      {/* Pricing cards - flex with items aligned center to emphasize the middle card */}
+      {/* Rest of the pricing card components */}
       <div className="flex flex-wrap justify-center items-center gap-6">
         
         {/* Basic Plan */}
