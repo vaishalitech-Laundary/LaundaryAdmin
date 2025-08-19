@@ -78,7 +78,7 @@ const emails = [
 
 const index = () => {
   return (
-    <div className="flex gap-5 h-screen bg-bgWhite p-10 w-full">
+    <div className="flex gap-5 h-screen bg-bgWhite w-full">
 
       {/* Sidebar */}
       <div className="w-64 bg-white  shadow-xl px-7 py-10 flex flex-col rounded-4xl border-1 border-[#B9B9B9]">
