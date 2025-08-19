@@ -21,7 +21,8 @@ const data = [
 
 const Index = () => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen ml-[250px]">
+    <div className="p-6 bg-gray-100 min-h-screen">
+
       {/* Top Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {[
@@ -30,7 +31,7 @@ const Index = () => {
           { title: 'Total Sales', value: '$89,000', change: '-3.4% Down from yesterday', color: 'red' },
           { title: 'Total Pending', value: '2040', change: '+1.8% Up from yesterday', color: 'green' },
         ].map((item, idx) => (
-          <div key={idx} className="bg-white rounded-lg shadow p-4">
+          <div key={idx} className="bg-bgWhite rounded-lg shadow p-4">
             <h2 className="text-sm text-gray-500">{item.title}</h2>
             <p className="text-2xl font-semibold">{item.value}</p>
             <p className={`text-xs mt-1 text-${item.color}-500`}>{item.change}</p>
@@ -39,14 +40,14 @@ const Index = () => {
       </div>
 
       {/* Sales Chart */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
+      <div className="bg-bgWhite rounded-lg shadow p-4 mb-6">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-semibold text-gray-700">Sales Details</h2>
+          <h2 className="font-semibold text-darkText">Sales Details</h2>
           <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded">
             October
           </span>
         </div>
-        <div className="h-[250px]">
+        <div className="h-[26rem]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -66,10 +67,10 @@ const Index = () => {
       </div>
 
       {/* Deals Table */}
-      <div className="bg-white rounded-lg shadow p-4">
+      <div className="bg-bgWhite rounded-lg shadow p-4">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="font-semibold text-gray-700">Deals Details</h2>
-          <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded">
+          <h2 className="font-semibold text-darkText">Deals Details</h2>
+          <span className="text-xs bg-green-100 text-lbGreen px-2 py-1 rounded">
             October
           </span>
         </div>

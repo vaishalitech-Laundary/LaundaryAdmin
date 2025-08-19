@@ -4,3 +4,37 @@
 
 
 @import "tailwindcss";
+
+
+@theme{
+
+ /* /// background color is here */
+  --color-bgPri:#1F3C5F;
+  --color-bgWhite:#FFFFFF;
+  --color-bgBar:#98DC4D;
+
+ /* /// text color are here */
+ --color-darkText:#202224;
+ --color-lightText:#FFFFFF;
+
+
+ /* /// button color  -------- */
+ --color-btnSuccess:#00B342;
+ --color-btnRed:#F93C65;
+ --color-btnAlert:#FFB300;
+
+
+
+ /* /// labler color are here -----  */
+--color-lbGreen:#00B69B;
+--color-lbBlue:#6226EF;
+--color-lbYellow:#FFA756;
+--color-lbRed:#EA0234;
+
+
+/* /// chart color are here ------  */
+--color-chartGreen:#A9E26AC7;
+--color-chartBlue:#4383CE;
+
+
+}
