@@ -102,7 +102,7 @@ const Sidebar = () => (
 const AdminLayout = () => (
   <div className="flex">
     <Sidebar />
-    <main className="flex-1 p-6 min-h-screen overflow-y-auto bg-gray-100">
+    <main className="flex-1 min-h- overflow-y-auto bg-gray-100">
       <Outlet />
     </main>
   </div>
