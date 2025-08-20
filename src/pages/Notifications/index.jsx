@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 
 export default function Notifications() {
@@ -39,10 +40,10 @@ export default function Notifications() {
 
   return (
     <div className="w-full pt-5 pb-5">
-      <h2 className="text-xl font-bold text-[var(--color-darkText)]">
+      <h2 className="text-xl font-bold text-darkText">
         Notifications
       </h2>
-      <p className="text-sm text-[var(--color-darkText)]/70">
+      <p className="text-sm text-darkText/70">
         Configure how you receive notifications.
       </p>
 
@@ -50,14 +51,14 @@ export default function Notifications() {
 
 
         <div className="mt-6">
-          <p className="font-medium text-[var(--color-darkText)] mb-2">
+          <p className="font-medium text-darkText mb-2">
             Notify me about...
           </p>
           <div className="space-y-2">
             {remindersAndUpdates.map((opt) => (
               <label
                 key={opt}
-                className="flex items-center gap-2 cursor-pointer text-[var(--color-darkText)]"
+                className="flex items-center gap-2 cursor-pointer text-darkText"
               >
                 <input
                   type="checkbox"
@@ -71,7 +72,7 @@ export default function Notifications() {
                       setSelected([...selected, opt]);
                     }
                   }}
-                  className="accent-[var(--color-bgPri)]"
+                  className="accent-bgPri"
                 />
                 {opt}
               </label>
@@ -80,27 +81,27 @@ export default function Notifications() {
 
         </div>
         <div className="mt-8">
-          <h3 className="font-medium text-lg text-[var(--color-darkText)]">
+          <h3 className="font-medium text-lg text-darkText">
             Email Notifications
           </h3>
           <div className="mt-4 space-y-4">
             {emailNotifications.map((item) => (
               <div
                 key={item.key}
-                className="flex justify-between items-center rounded-xl border p-4"
+                className="flex justify-between items-center rounded-xl border-2 border-darkText/20 p-4"
               >
                 <div>
-                  <p className="font-medium text-[var(--color-darkText)]">
+                  <p className="font-medium text-darkText">
                     {item.title}
                   </p>
-                  <p className="text-sm text-[var(--color-darkText)]/70">
+                  <p className="text-sm text-darkText/70">
                     {item.desc}
                   </p>
                 </div>
                 <button
                   onClick={() => toggle(item.key)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${settings[item.key]
-                    ? "bg-[var(--color-bgPri)]"
+                    ? "bg-bgPri"
                     : "bg-gray-300"
                     }`}
                 >
@@ -124,15 +125,15 @@ export default function Notifications() {
               type="checkbox"
               checked={mobileDifferent}
               onChange={(e) => setMobileDifferent(e.target.checked)}
-              className="mt-1 accent-[var(--color-bgPri)]"
+              className="mt-1 accent-bgPri"
             />
             <div>
-              <p className="font-medium text-[var(--color-darkText)]">
+              <p className="font-medium text-darkText">
                 Use different settings for my mobile devices
               </p>
-              <p className="text-sm text-[var(--color-darkText)]/70">
+              <p className="text-sm text-darkText/70">
                 You can manage your mobile notifications in the{" "}
-                <a href="#" className="underline text-[var(--color-bgPri)]">
+                <a href="#" className="underline text-bgPri">
                   mobile settings
                 </a>{" "}
                 page.
@@ -143,9 +144,9 @@ export default function Notifications() {
           <button
             type="button"
             className="mt-5 inline-flex items-center rounded-xl px-4 py-2 font-medium
-                     bg-[var(--color-bgPri)] text-[var(--color-bgWhite)]
+                     bg-bgPri text-bgWhite
                      hover:opacity-90 focus:outline-none focus:ring-2
-                     focus:ring-[var(--color-bgPri)]/40 shadow-sm"
+                     focus:ring-bgPri/40 shadow-sm"
           >
             Update notifications
           </button>
