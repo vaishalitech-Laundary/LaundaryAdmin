@@ -47,18 +47,18 @@ export default function Notifications() {
         Configure how you receive notifications.
       </p>
 
-      <div className="max-w-2xl mx-auto p-6">
+      <div className="max-w-2xl mx-auto px-1">
 
 
         <div className="mt-6">
-          <p className="font-medium text-darkText mb-2">
+          <p className="font-semibold text-darkText mb-2 lg:text-lg">
             Notify me about...
           </p>
           <div className="space-y-2">
             {remindersAndUpdates.map((opt) => (
               <label
                 key={opt}
-                className="flex items-center gap-2 cursor-pointer text-darkText"
+                className="flex text-sm font-normal items-center gap-2 cursor-pointer text-darkText"
               >
                 <input
                   type="checkbox"
@@ -84,38 +84,40 @@ export default function Notifications() {
           <h3 className="font-medium text-lg text-darkText">
             Email Notifications
           </h3>
-          <div className="mt-4 space-y-4">
+          <div className="mt-4 lg:space-y-4 space-y-2">
             {emailNotifications.map((item) => (
               <div
                 key={item.key}
                 className="flex justify-between items-center rounded-xl border-2 border-darkText/20 p-4"
               >
-                <div>
-                  <p className="font-medium text-darkText">
+                <div className="flex-1">
+                  <p className="font-medium text-darkText sm:text-base lg:text-md">
                     {item.title}
                   </p>
-                  <p className="text-sm text-darkText/70">
+                  <p className="text-xs sm:text-sm text-darkText/70">
                     {item.desc}
                   </p>
                 </div>
-                <button
-                  onClick={() => toggle(item.key)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${settings[item.key]
-                    ? "bg-bgPri"
-                    : "bg-gray-300"
-                    }`}
-                >
-                  <span
-                    className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${settings[item.key] ? "translate-x-6" : "translate-x-1"
+
+                <div className="w-14 flex justify-end">
+                  <button
+                    onClick={() => toggle(item.key)}
+                    className={`relative inline-flex h-4 w-8 sm:h-5 sm:w-10 items-center rounded-full transition-colors ${settings[item.key] ? "bg-bgPri" : "bg-gray-300"
                       }`}
-                  />
-                </button>
+                  >
+                    <span
+                      className={`inline-block h-3 w-3 transform rounded-full bg-white transition ${settings[item.key] ? "translate-x-4 sm:translate-x-5" : "translate-x-1"
+                        }`}
+                    />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
+
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col justify-center">
           <label
             htmlFor="mobileDifferent"
             className="flex items-start gap-3 cursor-pointer"
@@ -128,10 +130,10 @@ export default function Notifications() {
               className="mt-1 accent-bgPri"
             />
             <div>
-              <p className="font-medium text-darkText">
+              <p className="font-medium text-darkText text-sm lg:text-base ">
                 Use different settings for my mobile devices
               </p>
-              <p className="text-sm text-darkText/70">
+              <p className="text-xs lg:text-sm text-darkText/70">
                 You can manage your mobile notifications in the{" "}
                 <a href="#" className="underline text-bgPri">
                   mobile settings
@@ -141,15 +143,17 @@ export default function Notifications() {
             </div>
           </label>
 
-          <button
-            type="button"
-            className="mt-5 inline-flex items-center rounded-xl px-4 py-2 font-medium
-                     bg-bgPri text-bgWhite
-                     hover:opacity-90 focus:outline-none focus:ring-2
-                     focus:ring-bgPri/40 shadow-sm"
-          >
-            Update notifications
-          </button>
+          <div className="mt-5 flex justify-center lg:justify-start">
+            <button
+              type="button"
+              className="w-48 inline-flex items-center text-sm justify-center rounded-lg px-4 py-2 font-medium
+                 bg-bgPri text-bgWhite
+                 hover:opacity-90 focus:outline-none focus:ring-2
+                 focus:ring-bgPri/40 shadow-sm"
+            >
+              Update notifications
+            </button>
+          </div>
         </div>
       </div>
     </div>
