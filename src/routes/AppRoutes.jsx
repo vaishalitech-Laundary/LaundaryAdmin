@@ -15,7 +15,6 @@ import Calendar from "../pages/Calendar";
 import Tasks from "../pages/Tasks";
 import Notifications from "../pages/Notifications";
 import Invoice from "../pages/Invoice";
-import ToDo from "../pages/ToDo/index.jsx"
 // import InvoiceDetail from "../pages/Invoice/[id]";
 import Settings from "../pages/Settings";
 import Teams from "../pages/Team";
@@ -35,7 +34,6 @@ const AppRoutes = () => (
                <Route path="/tasks" element={<Tasks />} />
                <Route path="/notifications" element={<Notifications />} />
                <Route path="/invoice" element={<Invoice />} />
-               <Route path="/todo" element={<ToDo/>} />
                {/* <Route path="/invoice/:id" element={<InvoiceDetail />} /> */}
                <Route path="/settings" element={<Settings />} />
                <Route path="/team" element={<Teams />} />

@@ -17,7 +17,7 @@ const menuItems = [
 const pageItems = [
   { label: 'Pricing', icon: <FaTags />, path: '/pricing' },
   { label: 'Calender', icon: <FaCalendarAlt />, path: '/calendar' },
-  { label: 'To-Do', icon: <FaTasks />, path: '/todo' },
+  { label: 'To-Do', icon: <FaTasks />, path: '/task' },
   { label: 'Notifications', icon: <FaBell />, path: '/notifications' },
   { label: 'Invoice', icon: <FaFileInvoice />, path: '/invoice' },
   { label: 'Team', icon: <FaUsers />, path: '/team' },
