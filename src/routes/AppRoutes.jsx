@@ -17,6 +17,7 @@ import Notifications from "../pages/Notifications";
 import Invoice from "../pages/Invoice";
 // import InvoiceDetail from "../pages/Invoice/[id]";
 import Settings from "../pages/Settings";
+import Teams from "../pages/Team";
 
 
 const AppRoutes = () => (
@@ -35,6 +36,7 @@ const AppRoutes = () => (
                <Route path="/invoice" element={<Invoice />} />
                {/* <Route path="/invoice/:id" element={<InvoiceDetail />} /> */}
                <Route path="/settings" element={<Settings />} />
+               <Route path="/team" element={<Teams />} />
                <Route path="/logout" element={<Logout />} />
           </Route>
 

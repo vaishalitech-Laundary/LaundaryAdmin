@@ -100,9 +100,9 @@ const Sidebar = () => (
 );
 
 const AdminLayout = () => (
-  <div className="flex">
+  <div className="flex h-screen">
     <Sidebar />
-    <main className="flex-1 p-6 min-h-screen overflow-y-auto bg-gray-100">
+    <main className="flex-1 p-6 min-h- overflow-y-auto bg-bgWhite">
       <Outlet />
     </main>
   </div>
