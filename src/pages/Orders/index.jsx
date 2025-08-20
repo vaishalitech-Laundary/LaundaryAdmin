@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.jsx";
-import { Filter, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Filter, Search, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "../../App.css";
@@ -16,7 +16,7 @@ import "../../App.css";
 function Index() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [orderTypesModal, setOrderTypesModal] = useState(false);
+  const [orderStatusModal, setOrderStatusModal] = useState(false);
   const [calendarModal, setCalendarModal] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
@@ -184,7 +184,7 @@ function Index() {
               <Select>
                 <SelectTrigger
                   className="w-[140px] h-10 border-gray-300"
-                  onClick={() => setOrderTypesModal(true)}
+                  onClick={() => setOrderStatusModal(true)}
                 >
                   <SelectValue placeholder="Order Status" />
                 </SelectTrigger>
@@ -319,8 +319,14 @@ function Index() {
       {/* Order Type Modal */}
       {showFilterModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-40 z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-[521px]">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-[521px] relative">
             <h2 className="text-lg font-semibold mb-4">Select Order Type</h2>
+            <button
+              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
+              onClick={() => setShowFilterModal(false)}
+            >
+              <X className="h-4 w-6" />
+            </button>
             <div className="grid grid-cols-3 gap-3 mb-4">
               {[
                 "Dry Cleaning",
@@ -359,10 +365,16 @@ function Index() {
       )}
 
       {/* Order Status Modal */}
-      {orderTypesModal && (
+      {orderStatusModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-40 z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-[521px]">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-[521px] relative">
             <h2 className="text-lg font-semibold mb-4">Select Order Status</h2>
+            <button
+              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
+              onClick={() => setOrderStatusModal(false)}
+            >
+              <X className="h-4 w-6" />
+            </button>
             <div className="grid grid-cols-3 gap-3 mb-4">
               {["Completed", "Processing", "On Hold", "In Transit"].map(
                 (status) => (
@@ -385,7 +397,7 @@ function Index() {
             </p>
             <Button
               className="w-[130px] bg-[#1F3C5F] hover:bg-[#2c5280] block m-auto cursor-pointer"
-              onClick={() => setOrderTypesModal(false)}
+              onClick={() => setOrderStatusModal(false)}
             >
               Apply Now
             </Button>
@@ -395,7 +407,13 @@ function Index() {
 
       {calendarModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-40 z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-[360px]">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-[360px] relative">
+            <button
+              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer "
+              onClick={() => setCalendarModal(false)}
+            >
+              <X className="h-4 w-6" />
+            </button>
             <DayPicker
               mode="multiple"
               selected={selectedDates}
