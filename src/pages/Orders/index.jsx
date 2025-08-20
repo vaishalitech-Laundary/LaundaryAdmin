@@ -82,15 +82,6 @@ function Index() {
       status: 'On Hold',
       statusClass: 'status-on-hold'
     },
-    {
-      id: '00009',
-      name: 'Dollie Hines',
-      address: '124 Lyla Forge Suite 975',
-      date: '09 Jun 2019',
-      services: 'Ironing',
-      status: 'In Transit',
-      statusClass: 'status-in-transit'
-    }
   ]
 
   return (
