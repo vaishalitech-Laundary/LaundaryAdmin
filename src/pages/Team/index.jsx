@@ -1,49 +1,43 @@
-import React, { useState } from 'react'
+import React from "react";
 
-const Index = () => {
-    
-    const [formData,setFormData]=useState({
-        name:"",
-        email:""
-    })
+const Team = () => {
+  const member = {
+    name: "Sai sharma",
+    role: "CEO",
+    email: "sai.sharma@example.com",
+    img: "https://randomuser.me/api/portraits/men/1.jpg",
+  };
 
-    const handle=(e)=>{
-        const{name,value}=e.target
-        setFormData({...formData,[name]:value
+  const members = new Array(12).fill(member);
 
-        })
-    }
-
-    const submi=(e)=>{
-        e.preventDefault();
-        console.log(formData)
-    }
   return (
-    <div>
-        <form onSubmit={submi}>
-            <input type="text" name="name" value={formData.name} onChange={handle} placeholder='name'>
+    <div className="max-w-7xl mx-auto p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Team</h2>
+        <button className="bg-blue-950 text-white px-4 py-2 rounded-lg shadow  transition">
+          Add New Member
+        </button>
+      </div>
 
-            </input>
-            <input 
-            
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handle}
-            placeholder='email'
-            
-            
-            >
-
-
-            </input>
-            <button type="submit">Submit</button>
-
-
-        </form>
-      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {members.map((m, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center hover:shadow-lg transition"
+          >
+            <img
+              src={m.img}
+              alt={m.name}
+              className="w-20 h-20 rounded-full object-cover mb-4"
+            />
+            <h3 className="text-lg font-semibold">{m.name}</h3>
+            <p className="text-gray-500">{m.role}</p>
+            <p className="text-gray-400 text-sm mt-2">{m.email}</p>
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Team;
