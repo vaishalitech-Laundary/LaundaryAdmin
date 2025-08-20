@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TeamMember() {
+export default function AddTeamMember() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -30,13 +30,13 @@ export default function TeamMember() {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow rounded-xl p-8 flex flex-col items-center"
+        className="bg-bgWhite shadow rounded-xl p-8 flex flex-col items-center"
       >
         
         <label className="flex flex-col items-center cursor-pointer mb-6">
-          <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center border">
+          <div className="w-20 h-20 rounded-full bg-bgWhite flex items-center justify-center border">
             <svg
-              className="w-8 h-8 text-gray-500"
+              className="w-8 h-8 "
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -49,7 +49,7 @@ export default function TeamMember() {
               />
             </svg>
           </div>
-          <span className="mt-2 text-sm font-semibold text-blue-900">Upload Photo</span>
+          <span className="mt-2 text-sm font-semibold text-lbBlue">Upload Photo</span>
           <input
             type="file"
             name="photo"
@@ -60,72 +60,72 @@ export default function TeamMember() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
           <div>
-            <label className="block text-sm text-gray-500 font-medium mb-1">First Name</label>
+            <label className="block text-sm  font-medium mb-1">First Name</label>
             <input
               type="text"
               name="firstName"
               placeholder="Enter your first name"
               value={form.firstName}
               onChange={handleChange}
-              className="w-full border  rounded-lg px-4 py-2 focus:ring focus:ring-blue-200 bg-gray-100"
+              className="w-full border  rounded-lg px-4 py-2 focus:ring  bg-bgWhite"
             />
           </div>
 
           <div>
-            <label className="block text-gray-500  text-sm font-medium mb-1">Last Name</label>
+            <label className="block  text-darkText  text-sm font-medium mb-1">Last Name</label>
             <input
               type="text"
               name="lastName"
               placeholder="Enter your last name"
               value={form.lastName}
               onChange={handleChange}
-              className="w-full bg-gray-100 border rounded-lg px-4 py-2 focus:ring focus:ring-blue-200"
+              className="w-full  border rounded-lg px-4 py-2 focus:ring "
             />
           </div>
 
           <div>
-            <label className="block text-gray-500 text-sm font-medium mb-1">Your email</label>
+            <label className="block  text-darkText text-sm font-medium mb-1">Your email</label>
             <input
               type="email"
               name="email"
               placeholder="Enter your email"
               value={form.email}
               onChange={handleChange}
-              className="w-full border bg-gray-100 rounded-lg px-4 py-2 focus:ring focus:ring-blue-200"
+              className="w-full border bg-bgWhite rounded-lg px-4 py-2 focus:ring "
             />
           </div>
 
           <div>
-            <label className="block text-gray-500 text-sm font-medium mb-1">Phone Number</label>
+            <label className="block  text-darkText text-sm font-medium mb-1">Phone Number</label>
             <input
               type="text"
               name="phone"
               placeholder="Enter your phone number"
               value={form.phone}
               onChange={handleChange}
-              className="w-full border bg-gray-100 rounded-lg px-4 py-2 focus:ring focus:ring-blue-200"
+              className="w-full border   rounded-lg px-4 py-2 focus:ring "
             />
           </div>
 
           <div>
-            <label className="block text-gray-500 text-sm font-medium mb-1">Position</label>
+            <label className="block text-darkText text-sm font-medium mb-1">Position</label>
             <input
               type="text"
               name="position"
               placeholder="CEO"
               value={form.position}
               onChange={handleChange}
-              className="w-full  bg-gray-100 border rounded-lg px-4 py-2 focus:ring focus:ring-blue-200"
+              className="w-full   border rounded-lg px-4 py-2 focus:ring "
             />
           </div>
 
           <div>
-            <label className="block text-gray-500 text-sm font-medium mb-1">Gender</label>
+            <label className="block text-darkText text-sm font-medium mb-1">Gender</label>
             <select
               name="gender"
               value={form.gender}
               onChange={handleChange}
-              className="w-[50%] bg-gray-100 border rounded-lg px-4 py-2 focus:ring focus:ring-blue-200"
+              className="w-[50%] bg-bgWhite border rounded-lg px-4 py-2 focus:ring "
             >
               <option>Male</option>
               <option>Female</option>
@@ -137,7 +137,7 @@ export default function TeamMember() {
         
         <button
           type="submit"
-          className="mt-8 bg-blue-900 text-white px-12 py-3 rounded-lg shadow hover:bg-blue-700 transition"
+          className="mt-8 bg-bgPri text-lightText px-12 py-3 rounded-lg shadow  transition"
         >
           Add Now
         </button>

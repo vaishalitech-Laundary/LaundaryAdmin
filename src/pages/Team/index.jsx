@@ -13,8 +13,8 @@ const Team = () => {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Team</h2>
-        <button className="bg-blue-950 text-white px-4 py-2 rounded-lg shadow  transition">
+        <h2 className="text-2xl font-bold text-darkText">Team</h2>
+        <button className="bg-bgPri text-lightText px-4 py-2 rounded-lg shadow transition">
           Add New Member
         </button>
       </div>
@@ -23,16 +23,16 @@ const Team = () => {
         {members.map((m, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center hover:shadow-lg transition"
+            className="bg-bgWhite rounded-xl shadow p-6 flex flex-col items-center text-center hover:shadow-lg transition"
           >
             <img
               src={m.img}
               alt={m.name}
-              className="w-20 h-20 rounded-full object-cover mb-4"
+              className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-lbBlue"
             />
-            <h3 className="text-lg font-semibold">{m.name}</h3>
-            <p className="text-gray-500">{m.role}</p>
-            <p className="text-gray-400 text-sm mt-2">{m.email}</p>
+            <h3 className="text-lg font-semibold text-darkText">{m.name}</h3>
+            <p className="text-darkText">{m.role}</p>
+            <p className="text-darkText text-sm mt-2">{m.email}</p>
           </div>
         ))}
       </div>
