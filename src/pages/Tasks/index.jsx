@@ -3,15 +3,10 @@ import { FaStar, FaRegStar, FaTrash } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 
 const Tasks = () => {
-  // Initial tasks from the images
+  // Initial tasks
   const [tasks, setTasks] = useState([
     { id: 1, title: "Meeting with CEO", completed: false, favorite: false },
-    {
-      id: 2,
-      title: "Meet with Manager Meeting",
-      completed: false,
-      favorite: true,
-    },
+    { id: 2, title: "Meet with Manager Meeting", completed: false, favorite: true },
     { id: 3, title: "Send Invoices", completed: false, favorite: false },
     { id: 4, title: "Review with HR", completed: true, favorite: false },
     { id: 5, title: "Add Team Members", completed: false, favorite: false },
@@ -23,7 +18,7 @@ const Tasks = () => {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isAddingTask, setIsAddingTask] = useState(false);
 
-  // Toggle task completion status
+  // Toggle task completion
   const toggleCompleted = (id) => {
     setTasks(
       tasks.map((task) =>
@@ -32,7 +27,7 @@ const Tasks = () => {
     );
   };
 
-  // Toggle favorite status
+  // Toggle favorite
   const toggleFavorite = (id) => {
     setTasks(
       tasks.map((task) =>
@@ -41,7 +36,7 @@ const Tasks = () => {
     );
   };
 
-  // Delete a task
+  // Delete task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
@@ -54,7 +49,7 @@ const Tasks = () => {
       id: Date.now(),
       title: newTaskTitle,
       completed: false,
-      favorite: false,  
+      favorite: false,
     };
 
     setTasks([...tasks, newTask]);
@@ -64,34 +59,35 @@ const Tasks = () => {
 
   return (
     <div className="p-6">
+      {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">To-Do List</h1>
+        <h1 className="text-2xl font-bold text-darkText">To-Do List</h1>
         {isAddingTask ? (
           <button
             onClick={addTask}
-            className="bg-[#1F3C5F] text-white px-5 py-2 rounded-md shadow-sm"
+            className="bg-bgPri text-lightText px-5 py-2 rounded-md shadow-sm"
           >
             Save
           </button>
         ) : (
           <button
             onClick={() => setIsAddingTask(true)}
-            className="bg-[#1F3C5F] text-white px-5 py-2 rounded-md shadow-sm"
+            className="bg-bgPri text-lightText px-5 py-2 rounded-md shadow-sm"
           >
             Add New Task
           </button>
         )}
       </div>
 
-      {/* Task input field */}
+      {/* Input field */}
       {isAddingTask && (
-        <div className="mb-4 p-4 bg-white rounded-md shadow-sm border border-gray-100">
+        <div className="mb-4 p-4 bg-bgWhite rounded-md shadow-sm border border-lbYellow">
           <input
             type="text"
             value={newTaskTitle}
             onChange={(e) => setNewTaskTitle(e.target.value)}
             placeholder="Enter task title..."
-            className="w-full p-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-300"
+            className="w-full p-2 border border-lbBlue rounded focus:outline-none focus:ring-1 focus:ring-lbGreen"
             autoFocus
           />
         </div>
@@ -102,42 +98,50 @@ const Tasks = () => {
         {tasks.map((task) => (
           <div
             key={task.id}
-            className={`flex items-center p-4 rounded-md ${
-              task.completed ? "bg-[#7ED321]" : "bg-white"
-            } shadow-sm border border-gray-100`}
+            className={`flex items-center p-4 rounded-md shadow-sm border ${
+              task.completed
+                ? "bg-lbGreen border-lbGreen"
+                : "bg-bgWhite border-lbBlue"
+            }`}
           >
             <div className="flex items-center flex-1">
               <input
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => toggleCompleted(task.id)}
-                className="h-4 w-4 mr-4 cursor-pointer accent-green-500"
+                className="h-4 w-4 mr-4 cursor-pointer accent-lbGreen"
               />
-              <span>{task.title}</span>
+              <span
+                className={`${
+                  task.completed ? "line-through text-lightText" : "text-darkText"
+                }`}
+              >
+                {task.title}
+              </span>
             </div>
+
             <div className="flex items-center space-x-1">
+              {/* Favorite Button */}
               <button
                 onClick={() => toggleFavorite(task.id)}
                 className="p-2 focus:outline-none"
-                aria-label={
-                  task.favorite ? "Unmark as favorite" : "Mark as favorite"
-                }
               >
                 {task.favorite ? (
-                  <FaStar className="text-yellow-400 text-lg" />
+                  <FaStar className="text-lbYellow text-lg" />
                 ) : (
-                  <FaRegStar className="text-gray-300 text-lg" />
+                  <FaRegStar className=" text-lg" />
                 )}
               </button>
+
+              {/* Delete / Close Button */}
               <button
                 onClick={() => deleteTask(task.id)}
-                className="p-2 text-gray-400 hover:text-gray-600 focus:outline-none"
-                aria-label="Delete task"
+                className="p-2 focus:outline-none"
               >
                 {task.completed ? (
-                  <FaTrash className="text-white hover:text-gray-200 text-lg" />
+                  <FaTrash className="text-bgWhite text-lg" />
                 ) : (
-                  <IoMdClose className="text-lg" />
+                  <IoMdClose className=" text-lg" />
                 )}
               </button>
             </div>
