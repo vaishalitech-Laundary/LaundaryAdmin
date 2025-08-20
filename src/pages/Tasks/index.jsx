@@ -54,7 +54,7 @@ const Tasks = () => {
       id: Date.now(),
       title: newTaskTitle,
       completed: false,
-      favorite: false,
+      favorite: false,  
     };
 
     setTasks([...tasks, newTask]);
