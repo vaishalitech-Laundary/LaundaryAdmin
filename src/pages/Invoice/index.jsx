@@ -18,6 +18,9 @@ const InvoicePage = () => {
       { id: 2, description: "Dry Cleaning", quantity: 2, baseCost: 50 },
       { id: 3, description: "Steam Press", quantity: 5, baseCost: 100 },
       { id: 4, description: "Ironing", quantity: 4, baseCost: 1000 },
+      { id: 4, description: "Ironing", quantity: 4, baseCost: 1000 },
+      { id: 4, description: "Ironing", quantity: 4, baseCost: 1000 },
+      { id: 4, description: "Ironing", quantity: 4, baseCost: 1000 },
     ],
   });
 
