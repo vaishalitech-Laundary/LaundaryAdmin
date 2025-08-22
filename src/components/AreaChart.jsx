@@ -9,44 +9,61 @@ const AreaChart = ({ title, data, height = 300, showTitle = true }) => {
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm border">
-      {showTitle && (
-        <div className="mb-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">{title}</h3>
-          <div className="flex justify-between items-center">
-            <div className="flex space-x-6 text-sm">
-              {hasCurrentPrevious && (
-                <>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <span className="text-gray-600">Current year</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                    <span className="text-gray-600">Previous year</span>
-                  </div>
-                </>
-              )}
-              {hasIncomeSubscription && (
-                <>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-600">Income</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                    <span className="text-gray-600">Subscription</span>
-                  </div>
-                </>
-              )}
-            </div>
-            <div>
-              <select className="text-sm border rounded px-2 py-1">
-                <option>12 months</option>
-              </select>
-            </div>
+     {showTitle && (
+  <div className="mb-6 border-b pb-4">
+    <div className="flex justify-between items-center">
+      <div>
+        <p className="text-sm text-gray-500">Statistics</p>
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+      </div>
+
+      {/* Button groups only for Sales Report */}
+      {hasCurrentPrevious && title === "Sales report" && (
+        <div className="flex items-center space-x-4">
+          {/* Left group - Service vs Subscription */}
+          <div className="flex space-x-2">
+            <button className="flex items-center space-x-1 px-3 py-1.5 rounded-md border text-sm text-gray-700 hover:bg-gray-50">
+              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+              <span>Service sales</span>
+            </button>
+            <button className="flex items-center space-x-1 px-3 py-1.5 rounded-md border text-sm text-gray-700 hover:bg-gray-50">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <span>Subscription sales</span>
+            </button>
+          </div>
+
+          {/* Right group - Days toggle */}
+          <div className="flex space-x-1 bg-gray-50 rounded-xl p-1">
+            <button className="px-3 py-1 text-sm text-gray-500 rounded-lg hover:bg-white">
+              7 days
+            </button>
+            <button className="px-3 py-1 text-sm text-gray-500 rounded-lg hover:bg-white">
+              30 days
+            </button>
+            <button className="px-3 py-1 text-sm bg-white border border-green-500 text-black rounded-lg">
+              12 months
+            </button>
           </div>
         </div>
       )}
+
+      {/* Legend only for Total Income */}
+      {title === "Total income" && (
+        <div className="flex items-center space-x-4 text-sm">
+          <div className="flex items-center space-x-1 text-gray-700">
+            <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+            <span>Services</span>
+          </div>
+          <div className="flex items-center space-x-1 text-gray-700">
+            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+            <span>Subscriptions</span>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+)}
+
       
       <div style={{ height: `${height}px` }}>
         <ResponsiveContainer width="100%" height="100%">
