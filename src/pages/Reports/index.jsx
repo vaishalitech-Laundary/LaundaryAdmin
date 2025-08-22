@@ -1,10 +1,74 @@
 import React from 'react'
+import '../../App.css'
+import MetricCard from '../../components/MetricCard'
+import SalesChart from '../../components/SalesChart'
+import LineChart from '../../components/LineChart'
+import AreaChart from '../../components/AreaChart'
+import MultiLineChart from '../../components/MultiLineChart'
 
-const index = () => {
+function index() {
+  // Sample data for the dashboard
+  const metricsData = [
+    {
+      title: "Realtime users",
+      value: "635",
+      chartData: [
+        { time: 1, value: 20 },
+        { time: 2, value: 35 },
+        { time: 3, value: 25 },
+        { time: 4, value: 45 },
+        { time: 5, value: 30 },
+        { time: 6, value: 55 },
+        { time: 7, value: 40 }
+      ],
+      color: "#3B82F6"
+    },
+    {
+      title: "Total visits",
+      value: "325k",
+      chartData: [
+        { time: 1, value: 30 },
+        { time: 2, value: 45 },
+        { time: 3, value: 55 },
+        { time: 4, value: 35 },
+        { time: 5, value: 65 },
+        { time: 6, value: 45 },
+        { time: 7, value: 75 }
+      ],
+      color: "#10B981"
+    },
+    {
+      title: "Visit duration",
+      value: "5m 8s",
+      chartData: [
+        { time: 1, value: 40 },
+        { time: 2, value: 25 },
+        { time: 3, value: 45 },
+        { time: 4, value: 30 },
+        { time: 5, value: 35 },
+        { time: 6, value: 20 },
+        { time: 7, value: 25 }
+      ],
+      color: "#EF4444"
+    }
+  ]
+
+  const salesData = [
+    { month: 'Jan', value: 4000 },
+    { month: 'Feb', value: 3000 },
+    { month: 'Mar', value: 5000 },
+    { month: 'Apr', value: 4500 },
+    { month: 'May', value: 6000 },
+    { month: 'Jun', value: 5500 },
+    { month: 'Jul', value: 7000 },
+    { month: 'Aug', value: 6500 },
+    { month: 'Sep', value: 8000 },
+    { month: 'Oct', value: 7500 },
+    { month: 'Nov', value: 9000 },
+    { month: 'Dec', value: 8500 }
+  ]
+
   return (
-<<<<<<< Updated upstream
-    <div>index</div>
-=======
     <div className="min-h-screen  p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -118,8 +182,8 @@ const index = () => {
         </div>
       </div>
     </div>
->>>>>>> Stashed changes
   )
 }
 
 export default index
+
