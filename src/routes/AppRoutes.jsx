@@ -19,26 +19,30 @@ import Invoice from "../pages/Invoice";
 import Settings from "../pages/Settings";
 import Teams from "../pages/Team";
 
+import ProtectedRoutes from "../authMiddleware/ProtectedRoutes.jsx";
+
 
 const AppRoutes = () => (
      <Routes>
-          <Route element={<AdminLayout />}>
-               <Route path="/" element={<Dashboard />} />
-               <Route path="/services" element={<Services />} />
-               <Route path="/inbox" element={<Inbox />} />
-               <Route path="/orders" element={<Orders />} />
-               <Route path="/reports" element={<Reports />} />
-               <Route path="/reports/analytics" element={<Analytics />} />
-               <Route path="/pricing" element={<Pricing />} />
-               <Route path="/calendar" element={<Calendar />} />
-               <Route path="/tasks" element={<Tasks />} />
-               <Route path="/notifications" element={<Notifications />} />
-               <Route path="/invoice" element={<Invoice />} />
-               {/* <Route path="/invoice/:id" element={<InvoiceDetail />} /> */}
-               <Route path="/settings" element={<Settings />} />
-               <Route path="/team" element={<Teams />} />
+          <Route element={<ProtectedRoutes allowedRoles={["admin"]} />}>
+               <Route element={<AdminLayout />}>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/inbox" element={<Inbox />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/reports/analytics" element={<Analytics />} />
+                    <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/calendar" element={<Calendar />} />
+                    <Route path="/tasks" element={<Tasks />} />
+                    <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/invoice" element={<Invoice />} />
+                    {/* <Route path="/invoice/:id" element={<InvoiceDetail />} /> */}
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/team" element={<Teams />} />
 
-               <Route path="/logout" element={<Logout />} />
+                    <Route path="/logout" element={<Logout />} />
+               </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
