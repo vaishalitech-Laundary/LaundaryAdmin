@@ -19,6 +19,7 @@ import Invoice from "../pages/Invoice";
 import Settings from "../pages/Settings";
 import Teams from "../pages/Team";
 
+import Login from "../pages/Login/Login.jsx";
 
 const AppRoutes = () => (
      <Routes>
@@ -40,8 +41,9 @@ const AppRoutes = () => (
 
                <Route path="/logout" element={<Logout />} />
           </Route>
-
+          
           <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
      </Routes>
 );
 
