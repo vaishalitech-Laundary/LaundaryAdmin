@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import AdminLayout from "../../src/components/layout/AdminLayout";
 import NotFound from "../pages/NotFound";
 import Logout from "../pages/Logout";
+import Login from "../pages/Login/Login";
 
 // Dashboard imports
 import Dashboard from "../pages/Dashboard";
@@ -40,11 +41,11 @@ const AppRoutes = () => (
                     {/* <Route path="/invoice/:id" element={<InvoiceDetail />} /> */}
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/team" element={<Teams />} />
-
                     <Route path="/logout" element={<Logout />} />
                </Route>
           </Route>
 
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
      </Routes>
 );
