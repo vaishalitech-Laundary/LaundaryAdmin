@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -16,20 +17,52 @@ const data = [
   { name: '13th', sales: 2780 },
   { name: '14th', sales: 1890 },
   { name: '15th', sales: 2390 },
-  { name: '16th', sales: 3490 },
+  { name: '16th', sales: 3890 },
 ];
 
 const Index = () => {
+
+  const [summary, setSummary] = useState({});
+  const [sales, setSales] = useState([]);
+  const [orders, setOrders] = useState([]);
+
+
+
+  //// fetching the data 
+
+  useEffect(() => {
+
+    const res = async () => {
+      try {
+        const summRes = await axios.get("http://localhost:5000/api/dashboard/summary", { withCredentials: true });
+        const salesRes = await axios.get("http://localhost:5000/api/dashboard/sales", { withCredentials: true });
+        const ordersRes = await axios.get("http://localhost:5000/api/dashboard/orders", { withCredentials: true });
+        setSummary(summRes.data.summary);
+        setSales(salesRes.data);
+        setOrders(ordersRes.data);
+
+        // console.log(ordersRes.data);
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+    res();
+
+  }, [])
+  console.log(orders);
+
+
   return (
     <div className="p-6 bg-bgWhite min-h-screen">
 
       {/* Top Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {[
-          { title: 'Total User', value: '40,689', change: '+8.6% Up from yesterday', color: 'green' },
-          { title: 'Total Order', value: '10,293', change: '+1.5% Up from past week', color: 'blue' },
-          { title: 'Total Sales', value: '$89,000', change: '-3.4% Down from yesterday', color: 'red' },
-          { title: 'Total Pending', value: '2040', change: '+1.8% Up from yesterday', color: 'green' },
+          { title: 'Total User', value: summary.totalUsers, change: '+8.6% Up from yesterday', color: 'green' },
+          { title: 'Total Order', value: summary.totalOrders, change: '+1.5% Up from past week', color: 'blue' },
+          { title: 'Total Sales', value: summary.totalSales, change: '-3.4% Down from yesterday', color: 'red' },
+          { title: 'Total Pending', value: summary.totalPending, change: '+1.8% Up from yesterday', color: 'green' },
         ].map((item, idx) => (
           <div key={idx} className="bg-bgWhite rounded-lg shadow-lg p-4">
             <h2 className="text-sm text-gray-500">{item.title}</h2>
@@ -87,24 +120,19 @@ const Index = () => {
               </tr>
             </thead>
             <tbody>
-              {[
-                { service: 'Dry Cleaning', location: '6065 Midpatible Landing', date: '12.19.2019 - 12:35 PM', phone: '423', amount: '₹2500', status: 'Delivered' },
-                { service: 'Wash & Fold', location: '6065 Midpatible Landing', date: '12.19.2019 - 12:35 PM', phone: '423', amount: '₹1500', status: 'Pending' },
-                { service: 'Ironing', location: '6065 Midpatible Landing', date: '12.19.2019 - 12:35 PM', phone: '423', amount: '₹2000', status: 'Delivered' },
-              ].map((item, idx) => (
+              {orders.map((item, idx) => (
                 <tr key={idx} className="bg-white border-b hover:bg-gray-50">
-                  <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{item.service}</td>
+                  <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{item.orderType}</td>
                   <td className="px-4 py-2">{item.location}</td>
-                  <td className="px-4 py-2">{item.date}</td>
+                  <td className="px-4 py-2">{new Date(item.orderDate).toLocaleDateString("en-GB").replace(/\//g, "-")}</td>
                   <td className="px-4 py-2">{item.phone}</td>
-                  <td className="px-4 py-2">{item.amount}</td>
+                  <td className="px-4 py-2">{item.totalAmount}</td>
                   <td className="px-4 py-2">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-semibold ${
-                        item.status === 'Delivered'
-                          ? 'bg-green-100 text-green-600'
-                          : 'bg-yellow-100 text-yellow-600'
-                      }`}
+                      className={`px-2 py-1 rounded text-xs font-semibold ${item.status === 'Delivered'
+                        ? 'bg-green-100 text-green-600'
+                        : 'bg-yellow-100 text-yellow-600'
+                        }`}
                     >
                       {item.status}
                     </span>
