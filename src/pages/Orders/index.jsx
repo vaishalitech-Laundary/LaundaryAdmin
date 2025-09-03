@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import {
@@ -12,6 +12,7 @@ import { Filter, Search, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "../../App.css";
+import axios from "axios";
 
 function Index() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,6 +22,26 @@ function Index() {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
+
+  const [orderData, setOrderData] = useState([]);
+
+  // fetching all order from the server
+  useEffect(() => {
+    const orders = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/orders/allorder",
+          { withCredentials: true }
+        );
+        console.log("Fetched orders:", res.data.data);
+        setOrderData(res.data.data); // ✅ only set the array
+      } catch (error) {
+        alert("server error");
+      }
+    };
+    orders();
+  }, []);
+
   const toggleType = (type) => {
     setSelectedTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
@@ -35,110 +56,25 @@ function Index() {
     );
   };
 
-  const [orderData] = useState([
-    {
-      id: "00001",
-      name: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      date: "04 Sep 2019",
-      services: "Dry Cleaning",
-      status: "Completed",
-      statusClass: "status-completed",
-    },
-    {
-      id: "00002",
-      name: "Rosie Pearson",
-      address: "979 Immanuel Ferry Suite 526",
-      date: "28 May 2019",
-      services: "Stain Removal",
-      status: "Processing",
-      statusClass: "status-processing",
-    },
-    {
-      id: "00003",
-      name: "Darrell Caldwell",
-      address: "8587 Frida Ports",
-      date: "23 Nov 2019",
-      services: "Wash & Fold",
-      status: "Processing",
-      statusClass: "status-processing",
-    },
-    {
-      id: "00004",
-      name: "Gilbert Johnston",
-      address: "768 Destiny Lake Suite 600",
-      date: "05 Feb 2019",
-      services: "Stain Removal",
-      status: "Completed",
-      statusClass: "status-completed",
-    },
-    {
-      id: "00005",
-      name: "Alan Cain",
-      address: "042 Mylene Throughway",
-      date: "29 Jul 2019",
-      services: "Dry Cleaning",
-      status: "Processing",
-      statusClass: "status-processing",
-    },
-    {
-      id: "00006",
-      name: "Alfred Murray",
-      address: "543 Weimann Mountain",
-      date: "15 Aug 2019",
-      services: "Stain Removal",
-      status: "Completed",
-      statusClass: "status-completed",
-    },
-    {
-      id: "00007",
-      name: "Maggie Sullivan",
-      address: "New Scottsbluff",
-      date: "21 Dec 2019",
-      services: "Ironing",
-      status: "Processing",
-      statusClass: "status-processing",
-    },
-    {
-      id: "00008",
-      name: "Rosie Todd",
-      address: "New Jon",
-      date: "30 Apr 2019",
-      services: "Wash & Fold",
-      status: "On Hold",
-      statusClass: "status-on-hold",
-    },
-    {
-      id: "00009",
-      name: "Dollie Hines",
-      address: "124 Lyla Forge Suite 975",
-      date: "09 Aug 2025",
-      services: "Ironing",
-      status: "In Transit",
-      statusClass: "status-in-transit",
-    },
-  ]);
-
   // Filtering
   const filteredOrders = orderData.filter((order) => {
-    const matchesSearch = order.services
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      searchTerm === "" ||
+      order.orderType?.toLowerCase().includes(searchTerm.toLowerCase());
+
     const matchesType =
-      selectedTypes.length === 0 || selectedTypes.includes(order.services);
+      selectedTypes.length === 0 || selectedTypes.includes(order.orderType);
+
     const matchesStatus =
       selectedStatuses.length === 0 || selectedStatuses.includes(order.status);
+
     const matchesDate =
       selectedDates.length === 0 ||
-      selectedDates.some((d) =>
-        order.date.includes(
-          d.toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })
-        )
+      selectedDates.some(
+        (d) =>
+          new Date(order.orderDate).toDateString() === d.toDateString()
       );
+
     return matchesSearch && matchesType && matchesStatus && matchesDate;
   });
 
@@ -151,6 +87,13 @@ function Index() {
     startIndex,
     startIndex + itemsPerPage
   );
+
+  // Date format helper
+  const formatDate = (isoString) => {
+    return new Date(isoString)
+      .toLocaleDateString("en-GB")
+      .replace(/\//g, "-"); // DD-MM-YYYY
+  };
 
   return (
     <div className="order-lists-container min-h-screen p-6">
@@ -199,12 +142,13 @@ function Index() {
                   <SelectValue placeholder="Date" />
                 </SelectTrigger>
               </Select>
+
               {/* Search Input */}
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <input
                   type="text"
-                  placeholder="Wash & Fold"
+                  placeholder="Search order type"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="search-input w-full"
@@ -235,44 +179,36 @@ function Index() {
                       ID
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      NAME
+                      Order Type
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      ADDRESS
+                      Date
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      DATE
+                      Services
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      SERVICES
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      STATUS
+                      Status
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {currentOrders.map((order) => (
-                    <tr key={order.id} className="table-row">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {order.id}
+                    <tr key={order._id} className="table-row">
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                        {order.orderId}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {order.name}
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {order.orderType}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                        {order.address}
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {formatDate(order.orderDate)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                        {order.date}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                        {order.services}
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {order.services?.map((s) => s.serviceName).join(", ")}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span
-                          className={`inline-flex px-3 py-1 text-xs font-medium rounded-full ${order.statusClass}`}
-                        >
+                        <span className="inline-flex px-3 py-1 text-xs font-medium rounded-full bg-gray-200 text-gray-700">
                           {order.status}
                         </span>
                       </td>
@@ -287,7 +223,7 @@ function Index() {
               <div className="pagination-info">
                 Showing {startIndex + 1} -{" "}
                 {Math.min(startIndex + itemsPerPage, filteredOrders.length)} of{" "}
-                {orderData.length}
+                {filteredOrders.length}
               </div>
               <div className="flex items-center space-x-2">
                 <Button
@@ -322,7 +258,7 @@ function Index() {
           <div className="bg-white rounded-xl shadow-lg p-6 w-[521px] relative">
             <h2 className="text-lg font-semibold mb-4">Select Order Type</h2>
             <button
-              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
+              className=" top-2 right-4 absolute text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
               onClick={() => setShowFilterModal(false)}
             >
               <X className="h-4 w-6" />
@@ -370,13 +306,13 @@ function Index() {
           <div className="bg-white rounded-xl shadow-lg p-6 w-[521px] relative">
             <h2 className="text-lg font-semibold mb-4">Select Order Status</h2>
             <button
-              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
+              className=" top-2 right-4 absolute text-gray-500 hover:text-gray-700 cursor-pointer bg-gray-100 hover:bg-gray-200 border rounded-full p-1"
               onClick={() => setOrderStatusModal(false)}
             >
               <X className="h-4 w-6" />
             </button>
             <div className="grid grid-cols-3 gap-3 mb-4">
-              {["Completed", "Processing", "On Hold", "In Transit"].map(
+              {["Pending Pickup", "Completed", "Rejected", "Refunded"].map(
                 (status) => (
                   <button
                     key={status}
@@ -405,11 +341,12 @@ function Index() {
         </div>
       )}
 
+      {/* Date Picker Modal */}
       {calendarModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-40 z-50">
           <div className="bg-white rounded-xl shadow-lg p-6 w-[360px] relative">
             <button
-              className=" top-2 right-4 absolute   text-gray-500 hover:text-gray-700 cursor-pointer "
+              className=" top-2 right-4 absolute text-gray-500 hover:text-gray-700 cursor-pointer "
               onClick={() => setCalendarModal(false)}
             >
               <X className="h-4 w-6" />
@@ -421,7 +358,7 @@ function Index() {
               captionLayout="buttons"
             />
             <p className="text-xs text-gray-500 mb-6">
-              *You can choose multiple date
+              *You can choose multiple dates
             </p>
             <Button
               className="w-[130px] bg-[#1F3C5F] hover:bg-[#2c5280] block m-auto cursor-pointer"
