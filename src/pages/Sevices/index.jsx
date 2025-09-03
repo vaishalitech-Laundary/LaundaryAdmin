@@ -1,13 +1,35 @@
-import React, { useState } from 'react';
-import data from "./serviceData.json";
+import React, { useEffect, useState } from 'react';
+// import data from "./serviceData.json";
 import { FiSearch, FiFilter } from 'react-icons/fi';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { BiChevronRight } from 'react-icons/bi';
+import axios from 'axios';
 
 const Index = () => {
+  const [data,setData]= useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [favorites, setFavorites] = useState({});
+
+//// fertching data from backend 
+
+useEffect(()=>{
+
+  const services = async()=>{
+    try {
+            const res = await axios.get("http://localhost:5000/api/services/allservices",{withCredentials:true});
+            setData(res.data);
+            console.log(res.data)
+        } 
+    catch (error) {
+      alert("Server Error");
+    }
+  }
+
+  services();
+
+},[])
+
   
   const toggleFavorite = (id) => {
     setFavorites(prev => ({
@@ -88,11 +110,11 @@ const Index = () => {
       {/* Services Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredServices.map((service) => (
-          <div key={service.id} className="rounded-lg overflow-hidden shadow-md bg-white">
+          <div key={service._id} className="rounded-lg overflow-hidden shadow-md bg-white">
             {/* Service Image */}
             <div className="relative h-48">
               <img 
-                src="https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                src={service.imageUrl}
                 alt={service.name} 
                 className="w-full h-full object-cover" 
               />
@@ -110,12 +132,12 @@ const Index = () => {
             {/* Service Info */}
             <div className="p-4">
               <div className="flex justify-between items-center mb-2">
-                <span className={`text-xs uppercase p-1 rounded-xl ${getHeadingColorClasses(service.heading)}`}>
-                  {service.heading}
+                <span className={`text-xs uppercase p-2 rounded ${getHeadingColorClasses(service.heading)}`}>
+                  {service.name}
                 </span>
-                <span className="font-semibold">{service.priceLabel}</span>
+                <span className="font-semibold">{service.price} RS</span>
               </div>
-              <p className="text-sm text-gray-700 mb-4">{service.shortDescription}</p>
+              <p className="text-sm text-gray-700 mb-4">{service.description}</p>
               
               <div className="flex justify-end">
                 <button className="flex items-center gap-1 text-blue-600 text-sm">
